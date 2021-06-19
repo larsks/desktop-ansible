@@ -1,0 +1,4 @@
+- name: ensure package cache exists
+  file:
+    path: "{{ package_cache_dir }}"
+    state: directory

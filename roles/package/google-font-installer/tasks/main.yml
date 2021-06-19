@@ -1,0 +1,4 @@
+- name: install google-font-installer
+  community.general.npm:
+    name: "{{ google_font_installer_package }}"
+    global: true

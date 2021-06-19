@@ -1,0 +1,13 @@
+tmux_packages:
+  - tmux
+  - python3-tmuxp
+
+tmux_config_repo: https://github.com/larsks/tmux.conf
+
+tmux_plugins:
+  - name: tmux-sensible
+    url: https://github.com/tmux-plugins/tmux-sensible.git
+  - name: tmux-yank
+    url: https://github.com/tmux-plugins/tmux-yank.git
+  - name: tpm
+    url: https://github.com/tmux-plugins/tpm.git

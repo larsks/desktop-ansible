@@ -1,0 +1,4 @@
+misc_packages:
+  - strace
+  - tcpdump
+  - wireshark

@@ -1,0 +1,27 @@
+- name: install neovim
+  tags: [package]
+  become: true
+  package:
+    name: "{{ neovim_packages }}"
+    state: installed
+
+- name: install neovim plugins
+  git:
+    repo: "{{ item.url }}"
+    dest: "~/.local/share/nvim/site/pack/git/start/{{ item.name }}"
+    version: master
+  loop: "{{ neovim_plugins }}"
+
+- name: install neovim configuration
+  git:
+    repo: "{{ neovim_config_repo }}"
+    dest: ~/.config/nvim
+
+- name: ensure vim alias for neovim
+  copy:
+    content: |
+      #!/bin/sh
+
+      exec nvim "$@"
+    mode: 0755
+    dest: ~/bin/vim

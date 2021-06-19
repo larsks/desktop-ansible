@@ -1,0 +1,58 @@
+- name: install git
+  tags: [package]
+  become: true
+  package:
+    name: "{{ git_packages }}"
+    state: installed
+
+- name: install git config
+  git:
+    repo: "{{ git_config_repo }}"
+    dest: ~/.config/git
+
+- name: create .gitconfig symlink
+  file:
+    path: ~/.gitconfig
+    state: link
+    src: ~/.config/git/config
+
+- name: download gh cli
+  get_url:
+    url: "{{ gh_cli_url }}"
+    dest: "{{ package_cache_dir }}/gh_{{ gh_cli_version }}.rpm"
+
+- name: check installed gh version
+  command: rpm -q gh
+  register: ghversion
+  failed_when: false
+  changed_when: ghversion.rc != 0
+
+- name: install gh cli
+  tags: [package]
+  become: true
+  package:
+    name: "{{ package_cache_dir }}/gh_{{ gh_cli_version }}.rpm"
+    state: latest
+    disable_gpg_check: true
+  when: >-
+    ghversion is defined and (
+    ghversion is changed or not ghversion.stdout.startswith("gh-%s" % gh_cli_version)
+    )
+
+- name: download git snippets
+  git:
+    repo: https://github.com/larsks/git-snippets
+    dest: "{{ package_cache_dir }}/git-snippets"
+  register: git_snippets
+
+- name: install git snippets
+  command: make install
+  args:
+    chdir: "{{ package_cache_dir }}/git-snippets"
+  when: git_snippets is changed
+
+- include_role:
+    name: package/git-revise
+
+- include_role:
+    name: package/git-open

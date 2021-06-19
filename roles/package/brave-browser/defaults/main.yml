@@ -1,0 +1,6 @@
+brave_repo_url: https://brave-browser-rpm-release.s3.brave.com/x86_64/
+brave_repo_path: /etc/yum.repos.d/brave-browser-rpm-release.s3.brave.com_x86_64_.repo
+brave_gpgkey_url: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+brave_packages:
+  - brave_browser
+brave_gpgkey_version: c2d4e821-5e7252b8

@@ -1,0 +1,25 @@
+- name: install tmux
+  tags: [package]
+  become: true
+  package:
+    name: "{{ tmux_packages }}"
+    state: installed
+
+- name: install tmux configuration
+  git:
+    repo: "{{ tmux_config_repo }}"
+    dest: "~/.tmux"
+    version: master
+
+- name: create tmux.conf symlink
+  file:
+    path: ~/.tmux.conf
+    state: link
+    src: ~/.tmux/tmux.conf
+
+- name: install plugins
+  git:
+    repo: "{{ item.url }}"
+    dest: "~/.tmux/plugins/{{ item.name }}"
+    version: master
+  loop: "{{ tmux_plugins }}"

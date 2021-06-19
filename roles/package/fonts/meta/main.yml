@@ -1,0 +1,3 @@
+dependencies:
+  - package_cache
+  - package/google-font-installer

@@ -1,0 +1,6 @@
+- name: install misc packages
+  tags: [package]
+  become: true
+  package:
+    name: "{{ misc_packages }}"
+    state: installed

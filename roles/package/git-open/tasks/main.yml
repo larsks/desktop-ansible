@@ -1,0 +1,4 @@
+- name: install git-open
+  community.general.npm:
+    name: "{{ git_open_package }}"
+    global: true

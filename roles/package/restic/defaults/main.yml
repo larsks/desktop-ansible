@@ -1,0 +1,3 @@
+restic_release: 0.12.0
+restic_url: https://github.com/restic/restic/releases/download/v{{ restic_release }}/restic_{{ restic_release }}_linux_amd64.bz2
+restic_bin_path: /usr/local/bin

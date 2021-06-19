@@ -1,0 +1,4 @@
+npm_packages:
+  - npm
+
+npm_install_prefix: "{{ ansible_user_dir }}"

@@ -1,0 +1,11 @@
+- name: install alacritty
+  tags: [package]
+  become: true
+  package:
+    name: "{{ alacritty_packages }}"
+    state: installed
+
+- name: install alacritty config
+  git:
+    repo: "{{ alacritty_config_repo }}"
+    dest: ~/.config/alacritty

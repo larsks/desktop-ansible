@@ -1,0 +1,24 @@
+- name: install font packages
+  tags: [package,font]
+  become: true
+  package:
+    name: "{{ font_packages }}"
+    state: installed
+
+- name: get list of fonts
+  command: fc-list
+  register: fontlist
+  changed_when: false
+
+- name: download terminus ttf font
+  tags: [font]
+  get_url:
+    url: "{{ terminus_ttf_url }}"
+    dest: "{{ package_cache_dir }}/terminus.zip"
+  when: >-
+    "TerminusTTF" not in fontlist.stdout
+
+- name: install terminus ttf font
+  command: unzip -d ~/.fonts "{{ package_cache_dir }}/terminus.zip"
+  when: >-
+    "TerminusTTF" not in fontlist.stdout

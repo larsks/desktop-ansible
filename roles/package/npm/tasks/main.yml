@@ -1,0 +1,15 @@
+- name: install npm
+  become: true
+  tags: [package]
+  package:
+    name: "{{ npm_packages }}"
+    state: installed
+
+- name: get current npm install prefix
+  command: npm config get prefix
+  register: npm_cur_prefix
+  changed_when: false
+
+- name: configure npm
+  command: npm config set prefix "{{ npm_install_prefix }}"
+  when: npm_cur_prefix.stdout != npm_install_prefix

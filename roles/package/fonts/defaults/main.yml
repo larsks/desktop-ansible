@@ -1,0 +1,7 @@
+font_packages:
+  - terminus-fonts
+  - terminus-fonts-console
+  - terminus-fonts-grub2
+  - terminus-fonts-legacy-x11
+
+terminus_ttf_url: https://files.ax86.net/terminus-ttf/files/latest.zip

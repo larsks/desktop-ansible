@@ -1,0 +1,5 @@
+- name: install git-revise
+  tags: [package]
+  command: pipx install git-revise
+  when: >-
+    "git-revise" not in pipx_packages

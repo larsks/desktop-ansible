@@ -1,0 +1,8 @@
+git_packages:
+  - git
+  - stgit
+
+git_config_repo: https://github.com/larsks/git.conf
+
+gh_cli_version: 1.11.0
+gh_cli_url: https://github.com/cli/cli/releases/download/v{{ gh_cli_version }}/gh_{{ gh_cli_version }}_linux_amd64.rpm

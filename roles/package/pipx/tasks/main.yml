@@ -1,0 +1,16 @@
+- name: install pipx
+  tags: [package]
+  become: true
+  package:
+    name: "{{ pipx_packages }}"
+    state: installed
+
+- name: get list of installed packages
+  command: pipx list --json
+  register: pipx_packages_raw
+  changed_when: false
+
+- name: set_fact
+  tags: [package]
+  set_fact:
+    pipx_packages: "{{ (pipx_packages_raw.stdout|from_json).venvs.keys() }}"

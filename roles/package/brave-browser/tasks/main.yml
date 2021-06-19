@@ -1,0 +1,23 @@
+- name: check for brave gpg key
+  command: rpm -q "gpg-pubkey-{{ brave_gpgkey_version }}"
+  register: brave_gpgkey
+  failed_when: false
+  changed_when: brave_gpgkey.rc != 0
+
+- name: import brave gpg key
+  become: true
+  command: rpm --import "{{ brave_gpgkey_url }}"
+  when: brave_gpgkey is changed
+
+- name: import brave repository
+  become: true
+  command: dnf config-manager --add-repo "{{ brave_repo_url }}"
+  args:
+    creates: "{{ brave_repo_path }}"
+
+- name: install brave
+  tags: [package]
+  become: true
+  package:
+    name: brave-browser
+    state: installed

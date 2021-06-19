@@ -1,0 +1,12 @@
+- hosts: localhost
+  roles:
+    - sudoers
+    - package/misc
+    - package/git
+    - package/alacritty
+    - package/neovim
+    - package/tmux
+    - package/brave-browser
+    - package/google-font-installer
+    - package/fonts
+    - package/restic

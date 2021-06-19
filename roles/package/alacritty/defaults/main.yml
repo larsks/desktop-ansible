@@ -1,0 +1,4 @@
+alacritty_packages:
+  - alacritty
+
+alacritty_config_repo: https://github.com/larsks/alacritty.conf
