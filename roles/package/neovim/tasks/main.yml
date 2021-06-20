@@ -18,10 +18,8 @@
     dest: ~/.config/nvim
 
 - name: ensure vim alias for neovim
-  copy:
-    content: |
-      #!/bin/sh
-
-      exec nvim "$@"
-    mode: 0755
-    dest: ~/bin/vim
+  become: true
+  file:
+    path: /usr/bin/vim
+    state: link
+    src: /usr/bin/nvim
