@@ -1,0 +1,5 @@
+---
+- name: ensure systemd user directory exists
+  file:
+    path: "{{ systemd_user_dir }}"
+    state: directory

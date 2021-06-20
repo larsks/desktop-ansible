@@ -10,3 +10,4 @@
     - package/google-font-installer
     - package/fonts
     - package/restic
+    - tmpwatch

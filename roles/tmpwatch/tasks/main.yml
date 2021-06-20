@@ -1,0 +1,21 @@
+---
+- name: install tmpwatch
+  tags: [package]
+  become: true
+  package:
+    name: tmpwatch
+    state: installed
+
+- name: install tmpwatch units
+  template:
+    src: '{{ item }}'
+    dest: '{{ systemd_user_dir }}'
+  with_items:
+    - tmpwatch.service
+    - tmpwatch.timer
+  notify: reload systemd user
+
+- name: activate tmpwatch timers
+  shell: |
+    systemctl --user enable tmpwatch.timer
+    systemctl --user start tmpwatch.timer

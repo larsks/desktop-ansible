@@ -1,0 +1,10 @@
+[Unit]
+Description=Clean up temporary files
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/tmpwatch -vf 7d {{ ' '.join(tmpwatch_directories) }}
+
+[Install]
+WantedBy=default.target
+
