@@ -1,0 +1,22 @@
+- name: install ssh
+  become: true
+  package:
+    name: "{{ ssh_packages }}"
+    state: installed
+
+- name: install sshd configuration
+  become: true
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: "0600"
+  notify: restart sshd
+
+- name: activate sshd
+  become: true
+  service:
+    name: sshd
+    enabled: true
+    state: started

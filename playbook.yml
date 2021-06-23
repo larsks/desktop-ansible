@@ -1,6 +1,7 @@
 - hosts: localhost
   roles:
     - sudoers
+    - service/sshd
     - package/misc
     - package/git
     - package/alacritty
