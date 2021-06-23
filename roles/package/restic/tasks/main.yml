@@ -6,7 +6,7 @@
 
 - name: uncompress restic
   become: true
-  command: bunzip2 -d "{{ package_cache_dir }}/restic.bz2"
+  command: bunzip2 -f "{{ package_cache_dir }}/restic.bz2"
   when: restic is changed
 
 - name: install restic
