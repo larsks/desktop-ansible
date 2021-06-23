@@ -1,0 +1,11 @@
+- name: install weechat
+  tags: [package]
+  become: true
+  package:
+    name: "{{ weechat_packages }}"
+    state: installed
+
+- name: install weechat configuration
+  git:
+    repo: "{{ weechat_config_repo }}"
+    dest: ~/.weechat
