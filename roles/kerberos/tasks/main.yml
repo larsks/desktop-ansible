@@ -1,0 +1,5 @@
+- name: install kerberos packages
+  become: true
+  package:
+    name: "{{ kerberos_packages }}"
+    state: installed

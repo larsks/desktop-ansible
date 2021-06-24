@@ -5,5 +5,5 @@ collections:
 
 roles:
   - name: redhat
-    src: ssh://git@github.com/larsks/ansible-role-redhat
+    src: git+ssh://git@github.com/larsks/ansible-role-redhat
     version: master
