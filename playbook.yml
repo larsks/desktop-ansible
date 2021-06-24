@@ -19,3 +19,4 @@
     - package/vlc
     - package/mutt
     - openshift
+    - package/golang

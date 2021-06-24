@@ -1,0 +1,10 @@
+- name: install go packages
+  become: true
+  package:
+    name: "{{ golang_packages }}"
+    state: installed
+
+- name: install go bash configuration
+  copy:
+    src: golang.sh
+    dest: "{{ ansible_user_dir }}/.bashrc.d"
