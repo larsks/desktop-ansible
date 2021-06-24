@@ -19,3 +19,8 @@
   copy:
     src: weechat.bash
     dest: "{{ bash_rc_dir }}/weechat.bash"
+
+- name: install tmuxp configuration
+  git:
+    repo: "{{ tmuxp_config_repo }}"
+    dest: ~/.tmuxp
