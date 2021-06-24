@@ -15,10 +15,11 @@
     repo: "{{ weeslack_config_repo }}"
     dest: ~/.weeslack
 
-- name: install weechat bash configuration
+- name: install weeslack wrapper 
   copy:
-    src: weechat.bash
-    dest: "{{ bash_rc_dir }}/weechat.bash"
+    src: weeslack
+    dest: "{{ ansible_user_dir }}/bin"
+    mode: "0755"
 
 - name: install tmuxp configuration
   git:
