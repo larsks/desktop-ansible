@@ -1,0 +1,17 @@
+- name: install required packages
+  become: true
+  package:
+    name: "{{ misc_tools_packages }}"
+    state: installed
+
+- name: check out misc tools repository
+  git:
+    repo: "{{ misc_tools_repo }}"
+    dest: "{{ package_cache_dir }}/misc_tools"
+  register: misc_tools
+
+- name: install misc tools
+  command: make install
+  args:
+    chdir: "{{ package_cache_dir }}/misc_tools"
+  when: misc_tools is changed

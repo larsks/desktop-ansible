@@ -11,5 +11,6 @@
     - package/google-font-installer
     - package/fonts
     - package/restic
-    - tmpwatch
     - package/weechat
+    - service/tmpwatch
+    - misc_tools
