@@ -1,0 +1,22 @@
+openshift_packages:
+  - fzf
+
+oc_version: 4.7.18
+oc_release_url: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/{{ oc_version }}/openshift-client-linux-{{ oc_version }}.tar.gz
+
+sops_version: 3.7.1
+sops_release_url: https://github.com/mozilla/sops/releases/download/v{{ sops_version }}/sops-v{{ sops_version }}.linux
+
+neat_version: 2.0.3
+neat_release_url: https://github.com/itaysk/kubectl-neat/releases/download/v{{ neat_version }}/kubectl-neat_linux_amd64.tar.gz
+
+ksops_version: 2.5.6
+ksops_release_url: https://github.com/viaduct-ai/kustomize-sops/releases/download/v{{ ksops_version }}/ksops_{{ ksops_version }}_Linux_x86_64.tar.gz
+
+kustomize_version: 4.1.3
+kustomize_release_url: https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv{{ kustomize_version }}/kustomize_v{{ kustomize_version }}_linux_amd64.tar.gz
+
+noobaa_version: 5.7.0
+noobaa_release_url: https://github.com/noobaa/noobaa-operator/releases/download/v{{ noobaa_version }}/noobaa-linux-v{{ noobaa_version }}
+
+oc_tools_url: https://github.com/larsks/oc-tools

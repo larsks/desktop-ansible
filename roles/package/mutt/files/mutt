@@ -1,0 +1,19 @@
+#!/bin/bash
+
+: ${MUTT:=neomutt}
+: ${MUTTRCDIR:=$HOME/.neomutt}
+
+profile=$1
+shift
+
+if [[ -z $profile ]]; then
+  echo "ERROR: no profile specified." >&2
+  exit 1
+fi
+
+if ! [[ -f $MUTTRCDIR/$profile/muttrc ]]; then
+        echo "ERROR: no such profile: $profile" >&2
+        exit 1
+fi
+
+exec $MUTT -F $MUTTRCDIR/$profile/muttrc "$@"

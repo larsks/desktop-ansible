@@ -3,6 +3,10 @@ collections:
     type: git
     version: main
 
+  - name: https://github.com/ansible-collections/community.general.copr
+    type: copr
+    version: main
+
 roles:
   - name: redhat
     src: git+ssh://git@github.com/larsks/ansible-role-redhat

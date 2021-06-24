@@ -1,0 +1,99 @@
+- name: install required packages
+  become: true
+  package:
+    name: "{{ openshift_packages }}"
+    state: installed
+
+- name: download openshift client
+  get_url:
+    url: "{{ oc_release_url }}"
+    dest: "{{ package_cache_dir }}/openshift-client-linux-{{ oc_version }}.tar.gz"
+  register: oc
+
+- name: install openshift client tools
+  when: oc is changed
+  unarchive:
+    src: "{{ package_cache_dir }}/openshift-client-linux-{{ oc_version }}.tar.gz"
+    dest: "{{ ansible_user_dir }}/bin"
+    include:
+      - oc
+      - kubectl
+
+- name: download sops
+  get_url:
+    url: "{{ sops_release_url }}"
+    dest: "{{ package_cache_dir }}/sops-{{ sops_version }}"
+  register: sops
+
+- name: install sops
+  copy:
+    src: "{{ package_cache_dir }}/sops-{{ sops_version }}"
+    dest: "{{ ansible_user_dir }}/bin/sops"
+    mode: "0755"
+
+- name: download neat plugin
+  get_url:
+    url: "{{ neat_release_url }}"
+    dest: "{{ package_cache_dir }}/kubectl-neat-{{ neat_version }}.tar.gz"
+  register: neat
+
+- name: install neat plugin
+  when: neat is changed
+  unarchive:
+    src: "{{ package_cache_dir }}/kubectl-neat-{{ neat_version }}.tar.gz"
+    dest: "{{ ansible_user_dir }}/bin"
+    include:
+      - kubectl-neat
+
+- name: download kustomize
+  get_url:
+    url: "{{ kustomize_release_url }}"
+    dest: "{{ package_cache_dir }}/kustomize-{{ kustomize_version }}.tar.gz"
+  register: kustomize
+
+- name: install kustomize
+  when: kustomize is changed
+  unarchive:
+    src: "{{ package_cache_dir }}/kustomize-{{ kustomize_version }}.tar.gz"
+    dest: "{{ ansible_user_dir }}/bin"
+
+- name: create kustomize plugin directory for ksops
+  file:
+    path: "{{ ansible_user_dir }}/.config/kustomize/plugin/viaduct.ai/v1/ksops/"
+    state: directory
+
+- name: download ksops plugin
+  get_url:
+    url: "{{ ksops_release_url }}"
+    dest: "{{ package_cache_dir }}/ksops-{{ ksops_version }}.tar.gz"
+  register: ksops
+
+- name: install ksops plugin
+  when: ksops is changed
+  unarchive:
+    src: "{{ package_cache_dir }}/ksops-{{ ksops_version }}.tar.gz"
+    dest: "{{ ansible_user_dir }}/.config/kustomize/plugin/viaduct.ai/v1/ksops/"
+    include:
+      - ksops
+
+- name: download noobaa
+  get_url:
+    url: "{{ noobaa_release_url }}"
+    dest: "{{ package_cache_dir }}/noobaa-{{ noobaa_version }}"
+
+- name: install noobaa
+  copy:
+    src: "{{ package_cache_dir }}/noobaa-{{ noobaa_version }}"
+    dest: "{{ ansible_user_dir }}/bin/noobaa"
+
+- name: download oc-tools
+  git:
+    repo: "{{ oc_tools_url }}"
+    dest: "{{ package_cache_dir }}/oc-tools"
+  register: oc_tools
+
+- name: install oc-tools
+  when: oc_tools is changed
+  command: make install
+  args:
+    chdir: "{{ package_cache_dir }}/oc-tools"

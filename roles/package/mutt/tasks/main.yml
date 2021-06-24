@@ -1,0 +1,23 @@
+- name: enable neomutt copr repository
+  become: true
+  community.general.copr:
+    name: "{{ neomutt_copr }}"
+    chroot: "fedora-{{ ansible_distribution_version }}-{{ ansible_architecture }}"
+    state: enabled
+
+- name: install mutt packages
+  become: true
+  package:
+    name: "{{ mutt_packages }}"
+    state: installed
+
+- name: install mutt configuration
+  git:
+    repo: "{{ mutt_config_repo }}"
+    dest: ~/.neomutt
+
+- name: install mutt wrapper script
+  copy:
+    src: mutt
+    dest: "{{ ansible_user_dir }}/bin"
+    mode: "0755"

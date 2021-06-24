@@ -16,3 +16,6 @@
     - misc_tools
     - redhat
     - fedora
+    - package/vlc
+    - package/mutt
+    - openshift

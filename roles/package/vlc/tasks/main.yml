@@ -1,0 +1,5 @@
+- name: install vlc packages
+  become: true
+  package:
+    name: "{{ vlc_packages }}"
+    state: installed

@@ -1,0 +1,8 @@
+- name: enable rpmfusion repositories
+  become: true
+  command: >-
+    dnf install -y
+    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm
+    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm
+  args:
+    creates: /etc/yum.repos.d/rpmfusion-free.repo
