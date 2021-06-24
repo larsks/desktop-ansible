@@ -1,4 +1,5 @@
 weechat_packages:
   - weechat
+  - python-websocket-client
 weechat_config_repo: ssh://git@github.com/larsks/weechat.conf
 weeslack_config_repo: ssh://git@github.com/larsks/weeslack.conf
