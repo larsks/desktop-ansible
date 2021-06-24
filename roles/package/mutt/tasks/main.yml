@@ -15,9 +15,16 @@
   git:
     repo: "{{ mutt_config_repo }}"
     dest: ~/.neomutt
+    version: master
 
 - name: install mutt wrapper script
   copy:
     src: mutt
     dest: "{{ ansible_user_dir }}/bin"
     mode: "0755"
+
+- name: install abook configuration
+  git:
+    repo: "{{ abook_config_repo }}"
+    dest: ~/.abook
+    version: master

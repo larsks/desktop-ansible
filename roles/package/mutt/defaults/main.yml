@@ -7,3 +7,4 @@ mutt_packages:
   - python3-ldap
 
 mutt_config_repo: ssh://git@github.com/larsks/mutt.conf
+abook_config_repo: ssh://git@github.com/larsks/abook.conf
