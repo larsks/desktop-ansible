@@ -1,3 +1,4 @@
 weechat_packages:
   - weechat
-weechat_config_repo: ssh://git@gitlab.com/larsks-dotfiles/weechat
+weechat_config_repo: ssh://git@github.com/larsks/weechat.conf
+weeslack_config_repo: ssh://git@github.com/larsks/weeslack.conf
