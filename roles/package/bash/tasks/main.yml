@@ -1,0 +1,4 @@
+- name: ensure bash rc dir exists
+  file:
+    path: "{{ bash_rc_dir }}"
+    state: directory

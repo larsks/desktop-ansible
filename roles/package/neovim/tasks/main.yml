@@ -23,3 +23,8 @@
     path: /usr/bin/vim
     state: link
     src: /usr/bin/nvim
+
+- name: install neovim bash configuration
+  copy:
+    src: neovim.bash
+    dest: "{{ bash_rc_dir }}/neovim.bash"

@@ -56,3 +56,9 @@
 
 - include_role:
     name: package/git-open
+
+- name: install git bash configuration
+  copy:
+    src: git.bash
+    dest: "{{ bash_rc_dir }}/git.bash"
+
