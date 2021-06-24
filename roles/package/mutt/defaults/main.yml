@@ -4,5 +4,6 @@ mutt_packages:
   - neomutt
   - abook
   - goobook
+  - python3-ldap
 
 mutt_config_repo: ssh://git@github.com/larsks/mutt.conf
