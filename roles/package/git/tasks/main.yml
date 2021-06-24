@@ -59,6 +59,6 @@
 
 - name: install git bash configuration
   copy:
-    src: git.bash
-    dest: "{{ bash_rc_dir }}/git.bash"
-
+    src: "{{ item }}"
+    dest: "{{ bash_rc_dir }}/"
+  loop: "{{ query('fileglob', '*.sh') }}"
