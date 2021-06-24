@@ -2,3 +2,8 @@ collections:
   - name: https://github.com/ansible-collections/community.general.git
     type: git
     version: main
+
+roles:
+  - name: redhat
+    src: ssh://git@github.com/larsks/ansible-role-redhat
+    version: master
