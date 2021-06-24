@@ -1,3 +1,6 @@
 dependencies:
   - package_cache
   - bash
+  - package/git-revise
+  - package/git-open
+  - package/pre-commit

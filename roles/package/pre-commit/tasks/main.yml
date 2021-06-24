@@ -1,0 +1,5 @@
+- name: install pre-commit
+  tags: [package]
+  command: pipx install pre-commit
+  when: >-
+    "pre-commit" not in pipx_packages

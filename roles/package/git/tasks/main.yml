@@ -51,12 +51,6 @@
     chdir: "{{ package_cache_dir }}/git-snippets"
   when: git_snippets is changed
 
-- include_role:
-    name: package/git-revise
-
-- include_role:
-    name: package/git-open
-
 - name: install git bash configuration
   copy:
     src: "{{ item }}"
