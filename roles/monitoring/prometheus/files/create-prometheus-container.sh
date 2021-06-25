@@ -15,5 +15,5 @@ if ! podman container exists prometheus; then
 		--net=host \
 		-v $PROM_DIR:$PROM_DIR \
 		-v prom_data:/prometheus \
-		prom/prometheus
+		docker.io/prom/prometheus
 fi

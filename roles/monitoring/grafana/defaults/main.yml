@@ -1,0 +1,3 @@
+grafana_anonymous_enabled: true
+grafana_anonymous_org_name: Main Org.
+grafana_anonymous_org_role: Admin

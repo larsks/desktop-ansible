@@ -1,0 +1,19 @@
+[Unit]
+Description=Grafana
+Wants=network.target
+After=network-online.target
+RequiresMountsFor=/run/containers/storage
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=-/etc/sysconfig/grafana
+Restart=on-failure
+TimeoutStopSec=70
+ExecStartPre={{ prom_libexec_dir }}/create-grafana-container.sh
+ExecStart=/usr/bin/podman start grafana
+ExecStop=/usr/bin/podman stop -t 10 grafana
+PIDFile=/run/grafana.pid
+Type=forking
+
+[Install]
+WantedBy=multi-user.target default.target
