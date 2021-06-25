@@ -26,5 +26,5 @@
 
 - name: install neovim bash configuration
   copy:
-    src: neovim.bash
-    dest: "{{ bash_rc_dir }}/neovim.bash"
+    src: neovim.sh
+    dest: "{{ bash_rc_dir }}"

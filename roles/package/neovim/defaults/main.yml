@@ -7,9 +7,9 @@ neovim_config_repo: https://github.com/larsks/nvim.conf
 
 neovim_plugins:
   - name: vim-fugitive
-    url: https://github.com/tpope/vim-fugitive.git
+    url: https://github.com/tpope/vim-fugitive
   - name: ale
-    url: https://github.com/dense-analysis/ale.git
+    url: https://github.com/dense-analysis/ale
   - name: indentLine
     url: https://github.com/Yggdroot/indentLine
   - name: vim-vinegar
@@ -25,4 +25,6 @@ neovim_plugins:
   - name: vim-airline
     url: https://github.com/vim-airline/vim-airline
   - name: firenvim
-    url: https://github.com/glacambre/firenvim.git
+    url: https://github.com/glacambre/firenvim
+  - name: vim-go
+    url: https://github.com/fatih/vim-go
