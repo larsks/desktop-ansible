@@ -28,3 +28,9 @@
   copy:
     src: neovim.sh
     dest: "{{ bash_rc_dir }}"
+
+- name: install neovim bash system-wide configuration
+  become: true
+  copy:
+    src: neovim.sh
+    dest: "/etc/profile.d"
