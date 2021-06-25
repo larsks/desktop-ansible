@@ -1,0 +1,6 @@
+[Timer]
+OnCalendar=hourly
+Unit=run-textfile-collectors@hourly.service
+
+[Install]
+WantedBy=timers.target

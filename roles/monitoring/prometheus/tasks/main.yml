@@ -1,0 +1,34 @@
+- name: ensure prometheus directory exists
+  become: true
+  file:
+    path: /etc/prometheus
+    state: directory
+    mode: "0755"
+
+- name: install create-prometheus-container script
+  become: true
+  copy:
+    src: create-prometheus-container.sh
+    dest: "{{ prom_libexec_dir }}"
+    mode: "0755"
+
+- name: install prometheus configuration
+  become: true
+  template:
+    src: prometheus.yml
+    dest: /etc/prometheus
+  notify: restart prometheus
+
+- name: install prometheus service
+  become: true
+  template:
+    src: prometheus.service
+    dest: "{{ systemd_unit_dir }}"
+  notify: reload systemd
+
+- name: activate prometheus service
+  become: true
+  service:
+    name: prometheus
+    state: started
+    enabled: true

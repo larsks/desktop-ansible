@@ -1,0 +1,6 @@
+[Timer]
+OnCalendar=daily
+Unit=run-textfile-collectors@daily.service
+
+[Install]
+WantedBy=timers.target

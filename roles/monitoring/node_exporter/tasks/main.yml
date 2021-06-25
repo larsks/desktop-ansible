@@ -1,0 +1,87 @@
+- name: download node exporter
+  get_url:
+    url: "{{ node_exporter_release_url }}"
+    dest: "{{ package_cache_dir }}/node_exporter-{{ node_exporter_version }}.tar.gz"
+  register: node_exporter
+
+- name: install node_exporter
+  become: true
+  when: node_exporter is changed or (force_node_exporter|default(false))|bool
+  unarchive:
+    remote_src: true
+    src: "{{ package_cache_dir }}/node_exporter-{{ node_exporter_version }}.tar.gz"
+    extra_opts:
+      - --strip-components=1
+    dest: "{{ prom_libexec_dir }}"
+    include:
+      - node_exporter-{{ node_exporter_version }}.linux-amd64/node_exporter
+
+- name: install node_exporter service
+  become: true
+  template:
+    src: node_exporter.service
+    dest: "{{ systemd_unit_dir }}"
+    mode: "0644"
+  notify: reload systemd
+
+- name: activate node_exporter service
+  become: true
+  service:
+    name: node_exporter.service
+    state: started
+    enabled: true
+
+- name: install textfile collector script
+  become: true
+  copy:
+    src: run-textfile-collectors.sh
+    dest: "{{ prom_libexec_dir }}"
+    mode: "0755"
+
+- name: install textfile collector service
+  become: true
+  template:
+    src: run-textfile-collectors@.service
+    dest: "{{ systemd_unit_dir }}"
+    mode: "0644"
+
+- name: install textfile collector timers
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: "{{ systemd_unit_dir }}"
+    mode: "0644"
+  loop: "{{ query('fileglob', '*.timer') }}"
+  notify: reload systemd
+  loop_control:
+    label: "{{ item|basename }}"
+
+- name: activate textfile collector timers
+  become: true
+  service:
+    name: "{{ item|basename }}"
+    state: started
+    enabled: true
+  loop: "{{ query('fileglob', '*.timer') }}"
+  loop_control:
+    label: "{{ item|basename }}"
+
+- name: create textfile collector directories
+  become: true
+  file:
+    path: "{{ prom_libexec_dir }}/textfile_collectors/{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - 1min
+    - 5min
+    - hourly
+    - daily
+
+- name: install textfile collectors
+  become: true
+  copy:
+    src: "{{ item.script }}"
+    dest: "{{ prom_libexec_dir }}/textfile_collectors/{{ item.interval }}"
+    mode: "0755"
+  loop: "{{ prom_textfile_collectors }}"

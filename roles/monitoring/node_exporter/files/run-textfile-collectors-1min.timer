@@ -1,0 +1,6 @@
+[Timer]
+OnCalendar=minutely
+Unit=run-textfile-collectors@1min.service
+
+[Install]
+WantedBy=timers.target

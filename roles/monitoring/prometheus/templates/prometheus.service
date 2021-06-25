@@ -1,0 +1,18 @@
+[Unit]
+Description=Prometheus
+Wants=network.target
+After=network-online.target
+RequiresMountsFor=/run/containers/storage
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=on-failure
+TimeoutStopSec=70
+ExecStartPre={{ prom_libexec_dir }}/create-prometheus-container.sh
+ExecStart=/usr/bin/podman start prometheus
+ExecStop=/usr/bin/podman stop -t 10 prometheus
+PIDFile=/run/prometheus.pid
+Type=forking
+
+[Install]
+WantedBy=multi-user.target default.target

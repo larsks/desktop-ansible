@@ -1,0 +1,7 @@
+[Service]
+Type=simple
+ExecStart={{ prom_libexec_dir }}/node_exporter \
+	--collector.textfile.directory /etc/prometheus/textfile
+
+[Install]
+WantedBy=multi-user.target
