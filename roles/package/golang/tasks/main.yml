@@ -8,3 +8,18 @@
   copy:
     src: golang.sh
     dest: "{{ ansible_user_dir }}/.bashrc.d"
+
+- name: download golangci-lint
+  get_url:
+    url: "{{ golangci_lint_release_url }}"
+    dest: "{{ package_cache_dir }}/{{ golangci_lint_tarball }}"
+  register: golangci_lint
+
+- name: install golangci-lint
+  unarchive:
+    src: "{{ package_cache_dir }}/{{ golangci_lint_tarball }}"
+    dest: "{{ ansible_user_dir }}/bin"
+    extra_opts:
+      - --strip-components=1
+    include:
+      - golangci-lint-{{ golangci_lint_version }}-linux-amd64/golangci-lint

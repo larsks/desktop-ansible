@@ -1,2 +1,6 @@
 golang_packages:
   - golang
+
+golangci_lint_version: 1.41.1
+golangci_lint_release_url: https://github.com/golangci/golangci-lint/releases/download/v{{ golangci_lint_version }}/golangci-lint-{{ golangci_lint_version }}-linux-amd64.tar.gz
+golangci_lint_tarball: golangci-lint-{{ golangci_lint_version }}.tar.gz
