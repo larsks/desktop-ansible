@@ -1,0 +1,5 @@
+- name: restart snmp_exporter
+  become: true
+  service:
+    name: snmp_exporter
+    state: restarted

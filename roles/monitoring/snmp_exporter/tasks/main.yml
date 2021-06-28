@@ -1,0 +1,20 @@
+- name: install create-snmp_exporter-container script
+  become: true
+  copy:
+    src: create-snmp_exporter-container.sh
+    dest: "{{ prom_libexec_dir }}"
+    mode: "0755"
+
+- name: install snmp_exporter service
+  become: true
+  template:
+    src: snmp_exporter.service
+    dest: "{{ systemd_unit_dir }}"
+  notify: reload systemd
+
+- name: activate snmp_exporter service
+  become: true
+  service:
+    name: snmp_exporter
+    state: started
+    enabled: true

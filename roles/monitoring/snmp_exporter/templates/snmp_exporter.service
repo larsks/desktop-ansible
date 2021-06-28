@@ -1,0 +1,19 @@
+[Unit]
+Description=Snmp_exporter
+Wants=network.target
+After=network-online.target
+RequiresMountsFor=/run/containers/storage
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+EnvironmentFile=-/etc/sysconfig/snmp_exporter
+Restart=on-failure
+TimeoutStopSec=70
+ExecStartPre={{ prom_libexec_dir }}/create-snmp_exporter-container.sh
+ExecStart=/usr/bin/podman start snmp_exporter
+ExecStop=/usr/bin/podman stop -t 10 snmp_exporter
+PIDFile=/run/snmp_exporter.pid
+Type=forking
+
+[Install]
+WantedBy=multi-user.target default.target

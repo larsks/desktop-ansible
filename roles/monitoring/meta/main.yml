@@ -2,3 +2,4 @@ dependencies:
   - monitoring/prometheus
   - monitoring/node_exporter
   - monitoring/grafana
+  - monitoring/snmp_exporter
