@@ -1,0 +1,5 @@
+libvirt_packages:
+  - libvirt
+  - virt-install
+  - virt-manager
+  - virt-viewer

@@ -21,3 +21,4 @@
     - openshift
     - package/golang
     - monitoring
+    - package/libvirt

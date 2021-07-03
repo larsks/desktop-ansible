@@ -1,0 +1,15 @@
+- name: install libvirt packages
+  become: true
+  package:
+    name: "{{ libvirt_packages }}"
+    state: installed
+
+- name: activate libvirt
+  become: true
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - libvirtd.socket
+    - libvirtd.service
