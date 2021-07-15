@@ -6,25 +6,5 @@ neovim_packages:
 neovim_config_repo: https://github.com/larsks/nvim.conf
 
 neovim_plugins:
-  - name: vim-fugitive
-    url: https://github.com/tpope/vim-fugitive
-  - name: ale
-    url: https://github.com/dense-analysis/ale
-  - name: indentLine
-    url: https://github.com/Yggdroot/indentLine
-  - name: vim-vinegar
-    url: https://github.com/tpope/vim-vinegar
-  - name: vim-signify
-    url: https://github.com/mhinz/vim-signify
-  - name: vim-easy-align
-    url: https://github.com/junegunn/vim-easy-align
-  - name: goyo
-    url: https://github.com/junegunn/goyo.vim
-  - name: limelight
-    url: https://github.com/junegunn/limelight.vim
-  - name: vim-airline
-    url: https://github.com/vim-airline/vim-airline
-  - name: firenvim
-    url: https://github.com/glacambre/firenvim
-  - name: vim-go
-    url: https://github.com/fatih/vim-go
+  - name: packer
+    url: https://github.com/wbthomason/packer.nvim
